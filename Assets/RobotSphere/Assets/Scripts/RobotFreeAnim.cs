@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class RobotFreeAnim : MonoBehaviour {
 
-	private CharacterController robot;
-	private float vel;
-	Vector3 rott;
-
 	Vector3 rot = Vector3.zero;
 	float rotSpeed = 40f;
 	Animator anim;
@@ -17,9 +13,6 @@ public class RobotFreeAnim : MonoBehaviour {
 	{
 		anim = gameObject.GetComponent<Animator>();
 		gameObject.transform.eulerAngles = rot;
-
-		robot = GetComponent<CharacterController>();
-		vel = 20f;
 	}
 
 	// Update is called once per frame
@@ -27,14 +20,6 @@ public class RobotFreeAnim : MonoBehaviour {
 	{
 		CheckKey();
 		gameObject.transform.eulerAngles = rot;
-		rott= new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-		if (rott.magnitude > 1)
-			rott = rott.normalized * vel;
-		else
-			rott = rott * vel;
-		robot.Move(rott * Time.deltaTime);
-
 	}
 
 	void CheckKey()
@@ -50,13 +35,13 @@ public class RobotFreeAnim : MonoBehaviour {
 		}
 
 		// Rotate Left
-		if (Input.GetKey(KeyCode.Z))
+		if (Input.GetKey(KeyCode.A))
 		{
 			rot[1] -= rotSpeed * Time.fixedDeltaTime;
 		}
 
 		// Rotate Right
-		if (Input.GetKey(KeyCode.X))
+		if (Input.GetKey(KeyCode.D))
 		{
 			rot[1] += rotSpeed * Time.fixedDeltaTime;
 		}
