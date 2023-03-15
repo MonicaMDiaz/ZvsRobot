@@ -16,6 +16,10 @@ public class RobotMovement : MonoBehaviour
     private float? lastGroundedTime;
     private float? jumpButtonPressedTime;
 
+    //bala
+    public Transform _setPoint;
+    public GameObject _bala;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,8 @@ public class RobotMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Gun();
+        
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -83,4 +89,16 @@ public class RobotMovement : MonoBehaviour
             animator.SetBool("Walk_Anim", false);
         }
     }
+
+    private void Gun()
+    {
+       if (Input.GetKeyDown(KeyCode.F))
+       {
+           Instantiate(_bala, _setPoint.transform.position, _setPoint.transform.rotation);
+
+       }
+
+    }
+
+
 }
