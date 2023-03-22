@@ -19,21 +19,12 @@ public class Door : Interactable
     public override void Interact()
     {
 
-            Vector3 vec = transform.rotation.eulerAngles;
-            Debug.Log(vec);
-
-
-       
+            //Vector3 vec = transform.rotation.eulerAngles;
+            //Debug.Log(vec);
         
             base.Interact();
-            transform.Rotate(Vector3.up * 180);
-            Debug.Log("Door Open");
-
-
-       
-
-
-
+            transform.Rotate(Vector3.up * 90);
+            //Debug.Log("Door Open");
 
     }
 }

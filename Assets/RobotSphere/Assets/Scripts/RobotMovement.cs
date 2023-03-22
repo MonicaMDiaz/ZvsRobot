@@ -16,6 +16,10 @@ public class RobotMovement : MonoBehaviour
     private float? lastGroundedTime;
     private float? jumpButtonPressedTime;
 
+    public Transform _object;
+    public float rayDistance = 2.0f;
+    string filtro = "Interactable";
+
     //bala
     public Transform _setPoint;
     public GameObject _bala;
@@ -40,7 +44,20 @@ public class RobotMovement : MonoBehaviour
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * speed;
         movementDirection.Normalize();
 
+        Debug.DrawRay(_object.position, _object.forward * rayDistance, Color.red);
+
         ySpeed += Physics.gravity.y * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(_object.position, _object.forward, out hit, rayDistance, LayerMask.GetMask(filtro)))
+            {
+                Debug.Log(hit.transform.name);
+                hit.transform.GetComponent<Interactable>().Interact();
+            }
+        }
 
         if (characterController.isGrounded)
         {
